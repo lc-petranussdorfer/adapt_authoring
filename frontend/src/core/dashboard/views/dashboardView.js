@@ -14,6 +14,7 @@ define(function(require){
     className: "dashboard",
 
     preRender: function() {
+      Origin.trigger('dashboard:dashboardView:preRender');
       this.collection = new ProjectCollection();
       this.collection.fetch();
 
@@ -35,6 +36,10 @@ define(function(require){
       'click a#sortProjectsByLastEdit'  : 'sortProjectsByLastEdit',
       'keyup .dashboard-sidebar-filter-input': 'filterProjectsByTitle',
       'click': 'removeSelectedItems'
+    },
+
+    postRender: function() {
+        Origin.trigger('dashboard:dashboardView:postRender');
     },
 
     switchLayoutToList: function() {

@@ -22,7 +22,8 @@ require.config({
       editorTheme: 'core/editor/theme',
       editorGlobal: 'core/editor/global',
       editorExtensions: 'core/editor/extensions',
-      tinymce: 'core/libraries/tinymce/tinymce.min'
+      tinymce: 'core/libraries/tinymce/tinymce.min',
+      joyride: 'core/libraries/joyride'
     },
     shim: {
       jquery: [
@@ -77,6 +78,10 @@ require.config({
           this.tinyMCE.DOM.events.domLoaded = true;
           return this.tinyMCE;
         }
+      },
+      joyride: {
+        deps: ['jquery'],
+        exports:'joyride'
       }
     }
 });
@@ -99,12 +104,14 @@ require([
     'coreJS/location/location',
     'coreJS/notify/notify',
     'coreJS/editingOverlay/editingOverlay',
+    'coreJS/help/help',
     'polyglot',
     'jquery-ui',
     'jquery-form',
     'mediaelement-and-player',
     'velocity',
     'scrollTo',
+    'joyride',
     'templates'
 ], function (
     Origin,
@@ -124,6 +131,7 @@ require([
     Location,
     Notify,
     EditingOverlay,
+    Help,
     Polyglot,
     JQueryUI,
     JQueryForm,
