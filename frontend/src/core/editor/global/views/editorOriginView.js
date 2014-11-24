@@ -5,6 +5,8 @@ define(function(require){
   var tinymce = require('tinymce');
 
   var EditorOriginView = OriginView.extend({
+    
+    dirtyFlag: false,
 
     events: {
       'click .paste-cancel'   : 'pasteCancel'
@@ -14,11 +16,32 @@ define(function(require){
       OriginView.prototype.initialize.apply(this, arguments);
       
       this.listenTo(Origin, 'editorView:pasteCancel', this.hidePasteZones);
+      this.listenTo(Origin, 'editorView:navigateAway', this.checkDirtyFlag);
+      var view = this;
+      var allForms = view.$('form');
+      // get all forms
+      allForms.each(function(i,el){
+
+        // get all formfields
+        // attach onchange event
+        $(el).on("change", _.bind(view.setPageDirty, view));  
+      });
     },
 
     postRender: function() {
     },
-
+    setPageDirty: function (e) {
+      console.log('you made changes!');
+      this.dirtyFlag = true;
+      $(window).on("beforeunload", _.bind(this.notifyUnsavedChanges, this));  
+    },
+    checkDirtyFlag: function (e) {      
+      return 'checkDirtyFlag return';
+    },
+    notifyUnsavedChanges: function () {
+      // Return the text for the notification                        
+      return window.polyglot.t('app.unsavedchanges');
+    },
     onCopy: function(event) {
       if (event) {
         event.preventDefault();

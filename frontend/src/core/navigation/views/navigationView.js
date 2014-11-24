@@ -32,7 +32,10 @@ define(function(require){
 
     onNavigationItemClicked: function(event) {
       event.preventDefault();
-      Origin.trigger('navigation:' + $(event.currentTarget).attr('data-event'));
+      Origin.trigger('editorView:navigateAway');
+      // if(dirty){
+        Origin.trigger('navigation:' + $(event.currentTarget).attr('data-event'));  
+      // }
     }
 
   }, {

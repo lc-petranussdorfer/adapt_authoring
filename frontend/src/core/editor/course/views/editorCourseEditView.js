@@ -18,7 +18,6 @@ define(function(require) {
     preRender: function() {
       this.listenTo(Origin, 'editorSidebarView:removeEditView', this.remove);
     },
-
     cancel: function(event) {
       event.preventDefault();
       Origin.trigger('editorSidebarView:removeEditView', this.model);

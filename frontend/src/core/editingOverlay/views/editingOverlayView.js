@@ -12,11 +12,19 @@ define(function(require) {
             $(window).on("resize", _.bind(this.resizeOverlay, this));
             this.resizeOverlay();
             this.render();
+            
+            // dirtyFlag = true;
+            // if(dirtyFlag){
+            //     $(window).on("beforeunload", _.bind(this.notifyUnsavedChanges, this));    
+            // }else{
+            //     $(window).on("beforeunload", _.unbind(this.notifyUnsavedChanges, this));    
+            // }
+            
         },
 
         render: function() {
             var template = Handlebars.templates[this.constructor.template];
-            this.$el.html(template());
+            this.$el.html(template());            
             _.defer(_.bind(function() {
                 this.postRender();
             }, this));
@@ -62,6 +70,11 @@ define(function(require) {
             var navigationHeight = $('.navigation').outerHeight();
             var locationTitleHeight = $('.location-title').outerHeight();
             this.$el.height(windowHeight - (navigationHeight + locationTitleHeight));*/
+        },
+
+        notifyUnsavedChanges: function () {
+            // Return the text for the notification
+            return window.polyglot.t('app.unsavedchanges');
         }
 
     }, {

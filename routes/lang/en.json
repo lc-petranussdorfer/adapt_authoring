@@ -165,5 +165,6 @@
   "app.pluginmanagement": "Plugin Management",
   "app.uploadplugin": "Upload Plugin",
   "app.uploadedbyuser": "Uploaded By User",
-  "app.pluginfile": "Plugin File"
+  "app.pluginfile": "Plugin File",
+  "app.unsavedchanges": "You have unsaved changes!"
 }
